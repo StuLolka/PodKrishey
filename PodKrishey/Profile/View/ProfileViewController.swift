@@ -21,6 +21,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .Global.backgroundViewController
         navigationItem.titleView = CustomNavigationTitle(title: .Profile.title)
+        setupNavigationBar()
     }
     
     func setViewModel(viewModel: ProfileViewModelProtocol) {
@@ -28,5 +29,15 @@ final class ProfileViewController: UIViewController {
         self.mainView.userViewAction = viewModel.showMoreInfoViewController
         self.viewModel?.updateView = mainView.addData
         self.viewModel?.getModel()
+    }
+    
+    private func setupNavigationBar() {
+        let signOutItem = UIBarButtonItem(title: .Profile.signOut, style: .done, target: self, action: #selector(signOut))
+        signOutItem.tintColor = .white
+        navigationItem.leftBarButtonItem = signOutItem
+    }
+    
+    @objc private func signOut() {
+        viewModel?.signOut()
     }
 }

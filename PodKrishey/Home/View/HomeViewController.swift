@@ -19,9 +19,10 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.likeAction = addLikedApartament(model:)
-        mainView.dislikeAction = removeLikedApartament(model:)
-        mainView.didSelectApartament = { item in
+        mainView.loadImage = viewModel?.loadImage(_:_:)
+        
+        mainView.likeAction = addFavoriteApartment(model:)
+        mainView.didSelectApartment = { item in
             self.viewModel?.showMoreDetails(model: item)
         }
         
@@ -31,10 +32,11 @@ final class HomeViewController: UIViewController {
         setNavigationBar()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        mainView.coll
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        viewModel?.updateModel(state: .willAppear)
+    }
+
     
     func setViewModel(viewModel: HomeViewModelProtocol) {
         self.viewModel = viewModel
@@ -42,13 +44,10 @@ final class HomeViewController: UIViewController {
     }
     
     private func updateView() {
-//        viewModel?.updateView = mainView.updateCollectionView(with:, reloadData: true)
-        
         viewModel?.updateView = { data, reloadCollectionView in
-            self.mainView.updateCollectionView(with: data, reloadData: reloadCollectionView)
+            self.mainView.updateCollectionView(with: data, scrollToTop: reloadCollectionView)
         }
         viewModel?.updateModel(state: .initial)
-//        self.viewModel?.updateModel = mainView.updateModel(model:)
     }
     
     @objc func searchButtonTouched() {
@@ -62,11 +61,7 @@ final class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
-    private func addLikedApartament(model: HomeDataModel) {
-        viewModel?.addLikedApartament(model: model)
-    }
-    
-    private func removeLikedApartament(model: HomeDataModel) {
-        viewModel?.removeLikedApartament(model: model)
+    private func addFavoriteApartment(model: ApartmentModel) {
+        viewModel?.addToFavorite(apartment: model)
     }
 }

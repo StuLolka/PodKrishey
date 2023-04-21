@@ -4,6 +4,7 @@ protocol ProfileViewModelProtocol {
     var updateView: ((_ profileModel: ProfileModel) -> ())? { get set }
     func getModel()
     func showMoreInfoViewController()
+    func signOut()
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {
@@ -22,6 +23,11 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     }
     
     func showMoreInfoViewController() {
-        output.goToMoreInfo()
+        output.goToMoreInfoController()
+    }
+    
+    func signOut() {
+        AuthManager.shared.signOut()
+        output.goToLoginController()
     }
 }

@@ -13,7 +13,7 @@ final class CustomProfileView: UIView {
     private lazy var changeAvatarButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("Изменить фотографию профиля", for: .normal)
+        button.setTitle(.ProfileView.changeAvatar, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 23)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.minimumScaleFactor = 0.3

@@ -1,7 +1,7 @@
 import UIKit
 
-final class ImagesApartamentCell: UICollectionViewCell {
-    static let id = "ImagesApartamentCell"
+final class ImagesApartmentCell: UICollectionViewCell {
+    static let id = "ImagesApartmentCell"
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false

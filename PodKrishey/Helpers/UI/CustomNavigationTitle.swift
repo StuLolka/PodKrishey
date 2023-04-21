@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class CustomNavigationTitle: UIView {
     private lazy var titleLabel: UILabel = {
@@ -20,17 +21,18 @@ final class CustomNavigationTitle: UIView {
     }
     
     private func setupView() {
-//        backgroundColor = .Global.blue
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 10
         clipsToBounds = true
         addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 40),
-            widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 100),
-            
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
+        
+        snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
     }
 }

@@ -3,10 +3,10 @@ import UIKit
 final class ApartamentCell: UICollectionViewCell {
     static let id = "ApartamentCell"
     
-    var likeAction: ((HomeDataModel) -> ())?
-    var dislikeAction: ((HomeDataModel) -> ())?
+    var likeAction: ((ApartmentModel) -> ())?
+    var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())?
     
-    private var model: HomeDataModel?
+    private var model: ApartmentModel?
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -16,6 +16,7 @@ final class ApartamentCell: UICollectionViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -23,6 +24,7 @@ final class ApartamentCell: UICollectionViewCell {
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 18)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -52,22 +54,23 @@ final class ApartamentCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addData(model: HomeDataModel) {
+    func addData(model: ApartmentModel) {
         self.model = model
-        model.isLiked ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
+        model.isFavorite ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
         descriptionLabel.text = model.shortDescription
-        imageView.image = UIImage(named: model.imageNames.first ?? "")
+        if let firstImage = model.imageNames.first {
+            loadImage?(firstImage) { image in
+                self.imageView.image = image
+            }
+        }
         priceLabel.text = (formatter.string(from: NSNumber(value: model.price)) ?? "") + " ₽"
     }
     
-    @objc func likeButtonTouched(button: UIButton) {
-        guard var model = model else { return }
-        model.isLiked.toggle()
-        model.isLiked ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
-        model.isLiked ? likeAction?(model) : dislikeAction?(self.model!)
-        self.model = model
+    @objc private func likeButtonTouched() {
+        guard let model = model else { return }
+        likeAction?(model)
+        !model.isFavorite ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
     }
-    
     
     private func setupView() {
         addSubviews(imageView, descriptionLabel, priceLabel, likeButton)
@@ -83,7 +86,6 @@ final class ApartamentCell: UICollectionViewCell {
             
             priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
-//            priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
             
             likeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             likeButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 13),

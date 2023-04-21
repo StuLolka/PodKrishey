@@ -3,6 +3,7 @@ import UIKit
 protocol SearchOutput {
     func searchButtonTouched(minPrice: Int, maxPrice: Int, roomNumber: Set<Int>)
     func resetButtonTouched()
+    func tapToDismiss()
 }
 
 final class SearchCoordinator {
@@ -22,23 +23,31 @@ final class SearchCoordinator {
         navigationController.present(controller, animated: true)
     }
     
-    fileprivate func dismissSearchViewController() {
+    fileprivate func resetFilters() {
         homeModelDelegate?.updateModel(state: .initial)
         navigationController.dismiss(animated: true)
     }
     
-    fileprivate func dismissSearchViewController(minPrice: Int, maxPrice: Int, roomNumber: Set<Int>) {
+    fileprivate func findApartments(minPrice: Int, maxPrice: Int, roomNumber: Set<Int>) {
         homeModelDelegate?.updateModel(state: .filter(minPrice: minPrice, maxPrice: maxPrice, roomNumber: roomNumber))
+        navigationController.dismiss(animated: true)
+    }
+    
+    fileprivate func dismiss() {
         navigationController.dismiss(animated: true)
     }
 }
 
 extension SearchCoordinator: SearchOutput {
     func searchButtonTouched(minPrice: Int, maxPrice: Int, roomNumber: Set<Int>) {
-        dismissSearchViewController(minPrice: minPrice, maxPrice: maxPrice, roomNumber: roomNumber)
+        findApartments(minPrice: minPrice, maxPrice: maxPrice, roomNumber: roomNumber)
     }
     
     func resetButtonTouched() {
-        dismissSearchViewController()
+        resetFilters()
+    }
+    
+    func tapToDismiss() {
+        dismiss()
     }
 }

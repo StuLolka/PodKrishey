@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		2006119F29B62F2D0087D598 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2006119E29B62F2D0087D598 /* CustomButton.swift */; };
+		200CDCE129DC50640081A5ED /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCE029DC50640081A5ED /* FirebaseAnalytics */; };
+		200CDCE329DC50640081A5ED /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCE229DC50640081A5ED /* FirebaseAuth */; };
+		200CDCE529DC50640081A5ED /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCE429DC50640081A5ED /* FirebaseDatabase */; };
+		200CDCE729DC50640081A5ED /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCE629DC50640081A5ED /* FirebaseDatabaseSwift */; };
+		200CDCE929DC50640081A5ED /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCE829DC50640081A5ED /* FirebaseFirestore */; };
+		200CDCEB29DC50640081A5ED /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCEA29DC50640081A5ED /* FirebaseFirestoreSwift */; };
+		200CDCED29DC50640081A5ED /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 200CDCEC29DC50640081A5ED /* FirebaseStorage */; };
+		200CDCEF29DC50810081A5ED /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200CDCEE29DC50810081A5ED /* FirebaseService.swift */; };
+		200CDCF129DC55610081A5ED /* GoogleService-Info-Base.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200CDCF029DC55610081A5ED /* GoogleService-Info-Base.plist */; };
+		20150A1129F02EDE00641D1F /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20150A1029F02EDE00641D1F /* AuthManager.swift */; };
 		2025B42B29ABC74900A65D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2025B42A29ABC74900A65D29 /* AppDelegate.swift */; };
 		2025B42D29ABC74900A65D29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2025B42C29ABC74900A65D29 /* SceneDelegate.swift */; };
 		2025B43429ABC74B00A65D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2025B43329ABC74B00A65D29 /* Assets.xcassets */; };
@@ -15,22 +25,26 @@
 		2025B43F29ABCAC100A65D29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2025B43E29ABCAC100A65D29 /* HomeViewController.swift */; };
 		2025B44229ABCAE100A65D29 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2025B44129ABCAE100A65D29 /* SearchViewController.swift */; };
 		202C8C4129B7EAAC00C6B240 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202C8C4029B7EAAC00C6B240 /* SearchCoordinator.swift */; };
+		2033A2C029DDE87200545343 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2BF29DDE87200545343 /* ErrorView.swift */; };
+		2033A2C429DDE9BC00545343 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2C329DDE9BC00545343 /* FavoriteViewModel.swift */; };
+		2033A2C729DDECEC00545343 /* FavoriteFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2033A2C629DDECEC00545343 /* FavoriteFactory.swift */; };
+		203C94AD29E724DD003E0B94 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 203C94AC29E724DD003E0B94 /* SnapKit */; };
 		204AD65329B53C2F001AC598 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204AD65229B53C2F001AC598 /* ProfileViewModel.swift */; };
-		2054C7A029C221A60015718C /* FullDescriptionApartamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C79F29C221A50015718C /* FullDescriptionApartamentViewController.swift */; };
-		2054C7A429C221FC0015718C /* FullDescriptionApartamentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7A329C221FC0015718C /* FullDescriptionApartamentView.swift */; };
-		2054C7A629C226870015718C /* FullDescriptionApartamentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7A529C226870015718C /* FullDescriptionApartamentFactory.swift */; };
-		2054C7A929C226BB0015718C /* FullDescriptionApartamentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7A829C226BB0015718C /* FullDescriptionApartamentCoordinator.swift */; };
-		2054C7AC29C2285A0015718C /* FullDescriptionApartamentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7AB29C2285A0015718C /* FullDescriptionApartamentViewModel.swift */; };
-		2054C7AF29C232C00015718C /* ImagesApartamentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7AE29C232C00015718C /* ImagesApartamentCell.swift */; };
-		2063349A29AC71AF009D6331 /* LikedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063349929AC71AF009D6331 /* LikedViewController.swift */; };
+		2054C7A029C221A60015718C /* FullDescriptionApartmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C79F29C221A50015718C /* FullDescriptionApartmentViewController.swift */; };
+		2054C7A429C221FC0015718C /* FullDescriptionApartmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7A329C221FC0015718C /* FullDescriptionApartmentView.swift */; };
+		2054C7A629C226870015718C /* FullDescriptionApartmentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7A529C226870015718C /* FullDescriptionApartmentFactory.swift */; };
+		2054C7A929C226BB0015718C /* FullDescriptionApartmentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7A829C226BB0015718C /* FullDescriptionApartmentCoordinator.swift */; };
+		2054C7AC29C2285A0015718C /* FullDescriptionApartmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7AB29C2285A0015718C /* FullDescriptionApartmentViewModel.swift */; };
+		2054C7AF29C232C00015718C /* ImagesApartmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2054C7AE29C232C00015718C /* ImagesApartmentCell.swift */; };
+		2063349A29AC71AF009D6331 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063349929AC71AF009D6331 /* FavoriteViewController.swift */; };
 		2063349C29AC71BB009D6331 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063349B29AC71BB009D6331 /* ProfileViewController.swift */; };
 		206334A029ACA239009D6331 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2063349F29ACA239009D6331 /* Colors.swift */; };
 		206334A329ACA334009D6331 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334A229ACA334009D6331 /* Strings.swift */; };
 		206334A529ACA409009D6331 /* CustomNavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334A429ACA409009D6331 /* CustomNavigationTitle.swift */; };
-		206334A829ACB88F009D6331 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334A729ACB88F009D6331 /* HomeView.swift */; };
-		206334AA29ACBB37009D6331 /* HomeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334A929ACBB37009D6331 /* HomeDataModel.swift */; };
+		206334A829ACB88F009D6331 /* ApartmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334A729ACB88F009D6331 /* ApartmentsView.swift */; };
+		206334AA29ACBB37009D6331 /* ApartmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334A929ACBB37009D6331 /* ApartmentModel.swift */; };
 		206334AD29ACBB7B009D6331 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334AC29ACBB7B009D6331 /* HomeViewModel.swift */; };
-		206334B029ACBC50009D6331 /* ApartamentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334AF29ACBC50009D6331 /* ApartamentData.swift */; };
+		206334B029ACBC50009D6331 /* ApartmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334AF29ACBC50009D6331 /* ApartmentData.swift */; };
 		206334B329ACBD6F009D6331 /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334B229ACBD6F009D6331 /* HomeFactory.swift */; };
 		206334B629ACC108009D6331 /* ApartamentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334B529ACC107009D6331 /* ApartamentCell.swift */; };
 		206334B829ACC221009D6331 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206334B729ACC221009D6331 /* Constants.swift */; };
@@ -52,6 +66,7 @@
 		207DC3A929B0B79200C0E424 /* SearchFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207DC3A829B0B79200C0E424 /* SearchFactory.swift */; };
 		207DC3AB29B0BA0500C0E424 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207DC3AA29B0BA0500C0E424 /* StackView.swift */; };
 		207DC3AD29B0D5B500C0E424 /* PriceTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207DC3AC29B0D5B500C0E424 /* PriceTextFieldView.swift */; };
+		209E278729E03E57008E52B8 /* GoogleService-Info-Auth.plist in Resources */ = {isa = PBXBuildFile; fileRef = 209E278629E03E57008E52B8 /* GoogleService-Info-Auth.plist */; };
 		20A4026729B4AAF200D5F3B0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A4026629B4AAF200D5F3B0 /* AppCoordinator.swift */; };
 		20A4026929B4AC1B00D5F3B0 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A4026829B4AC1B00D5F3B0 /* HomeCoordinator.swift */; };
 		20B769EA29B244CF008E1C6E /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B769E929B244CF008E1C6E /* NotificationView.swift */; };
@@ -67,6 +82,9 @@
 
 /* Begin PBXFileReference section */
 		2006119E29B62F2D0087D598 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		200CDCEE29DC50810081A5ED /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		200CDCF029DC55610081A5ED /* GoogleService-Info-Base.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Base.plist"; sourceTree = "<group>"; };
+		20150A1029F02EDE00641D1F /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		2025B42729ABC74900A65D29 /* PodKrishey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodKrishey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2025B42A29ABC74900A65D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2025B42C29ABC74900A65D29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,22 +94,25 @@
 		2025B43E29ABCAC100A65D29 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2025B44129ABCAE100A65D29 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		202C8C4029B7EAAC00C6B240 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		2033A2BF29DDE87200545343 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		2033A2C329DDE9BC00545343 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		2033A2C629DDECEC00545343 /* FavoriteFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteFactory.swift; sourceTree = "<group>"; };
 		204AD65229B53C2F001AC598 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		2054C79F29C221A50015718C /* FullDescriptionApartamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartamentViewController.swift; sourceTree = "<group>"; };
-		2054C7A329C221FC0015718C /* FullDescriptionApartamentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartamentView.swift; sourceTree = "<group>"; };
-		2054C7A529C226870015718C /* FullDescriptionApartamentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartamentFactory.swift; sourceTree = "<group>"; };
-		2054C7A829C226BB0015718C /* FullDescriptionApartamentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartamentCoordinator.swift; sourceTree = "<group>"; };
-		2054C7AB29C2285A0015718C /* FullDescriptionApartamentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartamentViewModel.swift; sourceTree = "<group>"; };
-		2054C7AE29C232C00015718C /* ImagesApartamentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesApartamentCell.swift; sourceTree = "<group>"; };
-		2063349929AC71AF009D6331 /* LikedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedViewController.swift; sourceTree = "<group>"; };
+		2054C79F29C221A50015718C /* FullDescriptionApartmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartmentViewController.swift; sourceTree = "<group>"; };
+		2054C7A329C221FC0015718C /* FullDescriptionApartmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartmentView.swift; sourceTree = "<group>"; };
+		2054C7A529C226870015718C /* FullDescriptionApartmentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartmentFactory.swift; sourceTree = "<group>"; };
+		2054C7A829C226BB0015718C /* FullDescriptionApartmentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartmentCoordinator.swift; sourceTree = "<group>"; };
+		2054C7AB29C2285A0015718C /* FullDescriptionApartmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullDescriptionApartmentViewModel.swift; sourceTree = "<group>"; };
+		2054C7AE29C232C00015718C /* ImagesApartmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesApartmentCell.swift; sourceTree = "<group>"; };
+		2063349929AC71AF009D6331 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		2063349B29AC71BB009D6331 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2063349F29ACA239009D6331 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		206334A229ACA334009D6331 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		206334A429ACA409009D6331 /* CustomNavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTitle.swift; sourceTree = "<group>"; };
-		206334A729ACB88F009D6331 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		206334A929ACBB37009D6331 /* HomeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataModel.swift; sourceTree = "<group>"; };
+		206334A729ACB88F009D6331 /* ApartmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApartmentsView.swift; sourceTree = "<group>"; };
+		206334A929ACBB37009D6331 /* ApartmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApartmentModel.swift; sourceTree = "<group>"; };
 		206334AC29ACBB7B009D6331 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		206334AF29ACBC50009D6331 /* ApartamentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApartamentData.swift; sourceTree = "<group>"; };
+		206334AF29ACBC50009D6331 /* ApartmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApartmentData.swift; sourceTree = "<group>"; };
 		206334B229ACBD6F009D6331 /* HomeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFactory.swift; sourceTree = "<group>"; };
 		206334B529ACC107009D6331 /* ApartamentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApartamentCell.swift; sourceTree = "<group>"; };
 		206334B729ACC221009D6331 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -113,6 +134,7 @@
 		207DC3A829B0B79200C0E424 /* SearchFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFactory.swift; sourceTree = "<group>"; };
 		207DC3AA29B0BA0500C0E424 /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		207DC3AC29B0D5B500C0E424 /* PriceTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTextFieldView.swift; sourceTree = "<group>"; };
+		209E278629E03E57008E52B8 /* GoogleService-Info-Auth.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Auth.plist"; sourceTree = "<group>"; };
 		20A4026629B4AAF200D5F3B0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		20A4026829B4AC1B00D5F3B0 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		20B769E929B244CF008E1C6E /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -124,6 +146,7 @@
 		20E7760329B8FFBC00E68AA1 /* MoreInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewModel.swift; sourceTree = "<group>"; };
 		20E7760629B901C100E68AA1 /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		20E7760829B9027E00E68AA1 /* CustomProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileView.swift; sourceTree = "<group>"; };
+		20EFFEBB29EEDC16008481A0 /* PodKrishey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PodKrishey.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,12 +154,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200CDCE729DC50640081A5ED /* FirebaseDatabaseSwift in Frameworks */,
+				203C94AD29E724DD003E0B94 /* SnapKit in Frameworks */,
+				200CDCE529DC50640081A5ED /* FirebaseDatabase in Frameworks */,
+				200CDCE129DC50640081A5ED /* FirebaseAnalytics in Frameworks */,
+				200CDCE929DC50640081A5ED /* FirebaseFirestore in Frameworks */,
+				200CDCED29DC50640081A5ED /* FirebaseStorage in Frameworks */,
+				200CDCE329DC50640081A5ED /* FirebaseAuth in Frameworks */,
+				200CDCEB29DC50640081A5ED /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20150A1229F0310A00641D1F /* AuthManager */ = {
+			isa = PBXGroup;
+			children = (
+				20150A1029F02EDE00641D1F /* AuthManager.swift */,
+			);
+			path = AuthManager;
+			sourceTree = "<group>";
+		};
 		2025B41E29ABC74900A65D29 = {
 			isa = PBXGroup;
 			children = (
@@ -156,19 +195,24 @@
 		2025B42929ABC74900A65D29 /* PodKrishey */ = {
 			isa = PBXGroup;
 			children = (
+				20EFFEBB29EEDC16008481A0 /* PodKrishey.entitlements */,
+				2025B43829ABC74B00A65D29 /* Info.plist */,
+				209E278629E03E57008E52B8 /* GoogleService-Info-Auth.plist */,
+				200CDCF029DC55610081A5ED /* GoogleService-Info-Base.plist */,
 				20CA681229AFBB9500CEF612 /* App */,
 				2025B43329ABC74B00A65D29 /* Assets.xcassets */,
 				2025B43529ABC74B00A65D29 /* LaunchScreen.storyboard */,
-				2025B43829ABC74B00A65D29 /* Info.plist */,
+				209E278529E03D61008E52B8 /* Info */,
 				2054C7A129C221E60015718C /* FullDescriptionApartament */,
 				2025B44029ABCAD300A65D29 /* Home */,
 				2025B44329ABCAF300A65D29 /* Search */,
-				2063349E29AC71DE009D6331 /* Liked */,
+				2063349E29AC71DE009D6331 /* Favorite */,
 				2063349D29AC71D7009D6331 /* Profile */,
 				207C1C3429B8FC9C0080966D /* MoreInfo */,
-				20BAFBDE29CC522000F174B6 /* Data */,
+				20BAFBDE29CC522000F174B6 /* Firebase */,
 				2068EE4629B4C92E00B004A7 /* Login */,
 				206334B129ACBC5F009D6331 /* Helpers */,
+				20150A1229F0310A00641D1F /* AuthManager */,
 			);
 			path = PodKrishey;
 			sourceTree = "<group>";
@@ -177,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				206334A629ACB884009D6331 /* View */,
-				206334AB29ACBB6A009D6331 /* Model */,
 				206334AE29ACBBC6009D6331 /* ViewModel */,
 				206334B429ACBF51009D6331 /* Factory */,
 				20A4026A29B4AEDB00D5F3B0 /* Coordinator */,
@@ -214,6 +257,40 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		2033A2BB29DDC81300545343 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2063349929AC71AF009D6331 /* FavoriteViewController.swift */,
+				2033A2BF29DDE87200545343 /* ErrorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2033A2BE29DDC90400545343 /* ApartmentsView */ = {
+			isa = PBXGroup;
+			children = (
+				206334B529ACC107009D6331 /* ApartamentCell.swift */,
+				206334A729ACB88F009D6331 /* ApartmentsView.swift */,
+			);
+			path = ApartmentsView;
+			sourceTree = "<group>";
+		};
+		2033A2C529DDEB9900545343 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2033A2C329DDE9BC00545343 /* FavoriteViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2033A2C829DDED6C00545343 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				2033A2C629DDECEC00545343 /* FavoriteFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
 		204AD65129B4FE22001AC598 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,9 +321,9 @@
 		2054C7A229C221F00015718C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2054C79F29C221A50015718C /* FullDescriptionApartamentViewController.swift */,
-				2054C7A329C221FC0015718C /* FullDescriptionApartamentView.swift */,
-				2054C7AE29C232C00015718C /* ImagesApartamentCell.swift */,
+				2054C79F29C221A50015718C /* FullDescriptionApartmentViewController.swift */,
+				2054C7A329C221FC0015718C /* FullDescriptionApartmentView.swift */,
+				2054C7AE29C232C00015718C /* ImagesApartmentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,7 +331,7 @@
 		2054C7A729C226A60015718C /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				2054C7A529C226870015718C /* FullDescriptionApartamentFactory.swift */,
+				2054C7A529C226870015718C /* FullDescriptionApartmentFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -262,7 +339,7 @@
 		2054C7AA29C226D30015718C /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				2054C7A829C226BB0015718C /* FullDescriptionApartamentCoordinator.swift */,
+				2054C7A829C226BB0015718C /* FullDescriptionApartmentCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -270,7 +347,7 @@
 		2054C7AD29C2289E0015718C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				2054C7AB29C2285A0015718C /* FullDescriptionApartamentViewModel.swift */,
+				2054C7AB29C2285A0015718C /* FullDescriptionApartmentViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -287,12 +364,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		2063349E29AC71DE009D6331 /* Liked */ = {
+		2063349E29AC71DE009D6331 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				2063349929AC71AF009D6331 /* LikedViewController.swift */,
+				2033A2BB29DDC81300545343 /* View */,
+				2033A2C529DDEB9900545343 /* ViewModel */,
+				2033A2C829DDED6C00545343 /* Factory */,
 			);
-			path = Liked;
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 		206334A129ACA327009D6331 /* Sourse */ = {
@@ -310,18 +389,8 @@
 			isa = PBXGroup;
 			children = (
 				2025B43E29ABCAC100A65D29 /* HomeViewController.swift */,
-				206334A729ACB88F009D6331 /* HomeView.swift */,
-				206334B529ACC107009D6331 /* ApartamentCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		206334AB29ACBB6A009D6331 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				206334A929ACBB37009D6331 /* HomeDataModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		206334AE29ACBBC6009D6331 /* ViewModel */ = {
@@ -414,6 +483,7 @@
 		2068EE5729B4D35E00B004A7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2068EE4029B4C7E900B004A7 /* UserData.swift */,
 				2068EE4229B4C80A00B004A7 /* ProfileModel.swift */,
 			);
 			path = Model;
@@ -448,6 +518,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		209E278529E03D61008E52B8 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		20A4026529B4AA1200D5F3B0 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +544,7 @@
 		20B769E829B244C6008E1C6E /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2033A2BE29DDC90400545343 /* ApartmentsView */,
 				206334A429ACA409009D6331 /* CustomNavigationTitle.swift */,
 				206334B929ACC885009D6331 /* View.swift */,
 				207DC3AA29B0BA0500C0E424 /* StackView.swift */,
@@ -477,13 +555,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		20BAFBDE29CC522000F174B6 /* Data */ = {
+		20BAFBDE29CC522000F174B6 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				206334AF29ACBC50009D6331 /* ApartamentData.swift */,
-				2068EE4029B4C7E900B004A7 /* UserData.swift */,
+				206334A929ACBB37009D6331 /* ApartmentModel.swift */,
+				206334AF29ACBC50009D6331 /* ApartmentData.swift */,
+				200CDCEE29DC50810081A5ED /* FirebaseService.swift */,
 			);
-			path = Data;
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		20CA681229AFBB9500CEF612 /* App */ = {
@@ -537,6 +616,16 @@
 			dependencies = (
 			);
 			name = PodKrishey;
+			packageProductDependencies = (
+				200CDCE029DC50640081A5ED /* FirebaseAnalytics */,
+				200CDCE229DC50640081A5ED /* FirebaseAuth */,
+				200CDCE429DC50640081A5ED /* FirebaseDatabase */,
+				200CDCE629DC50640081A5ED /* FirebaseDatabaseSwift */,
+				200CDCE829DC50640081A5ED /* FirebaseFirestore */,
+				200CDCEA29DC50640081A5ED /* FirebaseFirestoreSwift */,
+				200CDCEC29DC50640081A5ED /* FirebaseStorage */,
+				203C94AC29E724DD003E0B94 /* SnapKit */,
+			);
 			productName = PodKrishey;
 			productReference = 2025B42729ABC74900A65D29 /* PodKrishey.app */;
 			productType = "com.apple.product-type.application";
@@ -565,6 +654,10 @@
 				Base,
 			);
 			mainGroup = 2025B41E29ABC74900A65D29;
+			packageReferences = (
+				200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				203C94AB29E724DD003E0B94 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 2025B42829ABC74900A65D29 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -580,7 +673,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2025B43729ABC74B00A65D29 /* LaunchScreen.storyboard in Resources */,
+				209E278729E03E57008E52B8 /* GoogleService-Info-Auth.plist in Resources */,
 				2025B43429ABC74B00A65D29 /* Assets.xcassets in Resources */,
+				200CDCF129DC55610081A5ED /* GoogleService-Info-Base.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,35 +690,38 @@
 				20CA681129AFBADA00CEF612 /* AppFactory.swift in Sources */,
 				2068EE5429B4D23500B004A7 /* LoginCoordinator.swift in Sources */,
 				20E7760129B8FE7B00E68AA1 /* MoreInfoFactory.swift in Sources */,
+				2033A2C029DDE87200545343 /* ErrorView.swift in Sources */,
 				2068EE4E29B4CF8C00B004A7 /* LoginViewModel.swift in Sources */,
-				2054C7A929C226BB0015718C /* FullDescriptionApartamentCoordinator.swift in Sources */,
+				2054C7A929C226BB0015718C /* FullDescriptionApartmentCoordinator.swift in Sources */,
 				20E7760929B9027E00E68AA1 /* CustomProfileView.swift in Sources */,
 				2068EE4129B4C7E900B004A7 /* UserData.swift in Sources */,
 				20A4026729B4AAF200D5F3B0 /* AppCoordinator.swift in Sources */,
 				207DC3A729B0B3F000C0E424 /* NumberOfRoomsButton.swift in Sources */,
 				2025B44229ABCAE100A65D29 /* SearchViewController.swift in Sources */,
 				206334AD29ACBB7B009D6331 /* HomeViewModel.swift in Sources */,
-				2054C7AF29C232C00015718C /* ImagesApartamentCell.swift in Sources */,
+				2054C7AF29C232C00015718C /* ImagesApartmentCell.swift in Sources */,
 				207DC3AB29B0BA0500C0E424 /* StackView.swift in Sources */,
 				2068EE5C29B4D6CC00B004A7 /* ProfileFactory.swift in Sources */,
 				206334A329ACA334009D6331 /* Strings.swift in Sources */,
 				2068EE4329B4C80A00B004A7 /* ProfileModel.swift in Sources */,
-				2054C7AC29C2285A0015718C /* FullDescriptionApartamentViewModel.swift in Sources */,
+				2054C7AC29C2285A0015718C /* FullDescriptionApartmentViewModel.swift in Sources */,
 				207DC3A929B0B79200C0E424 /* SearchFactory.swift in Sources */,
 				206334A029ACA239009D6331 /* Colors.swift in Sources */,
 				20B769EA29B244CF008E1C6E /* NotificationView.swift in Sources */,
+				2033A2C729DDECEC00545343 /* FavoriteFactory.swift in Sources */,
 				2068EE5E29B4E5AB00B004A7 /* ProfileView.swift in Sources */,
 				206334BA29ACC885009D6331 /* View.swift in Sources */,
 				2006119F29B62F2D0087D598 /* CustomButton.swift in Sources */,
 				2068EE5929B4D36D00B004A7 /* ProfileCoordinator.swift in Sources */,
+				2033A2C429DDE9BC00545343 /* FavoriteViewModel.swift in Sources */,
 				20E7760729B901C100E68AA1 /* MoreInfoView.swift in Sources */,
-				206334A829ACB88F009D6331 /* HomeView.swift in Sources */,
+				206334A829ACB88F009D6331 /* ApartmentsView.swift in Sources */,
 				207DC3AD29B0D5B500C0E424 /* PriceTextFieldView.swift in Sources */,
-				206334AA29ACBB37009D6331 /* HomeDataModel.swift in Sources */,
-				2054C7A629C226870015718C /* FullDescriptionApartamentFactory.swift in Sources */,
+				206334AA29ACBB37009D6331 /* ApartmentModel.swift in Sources */,
+				2054C7A629C226870015718C /* FullDescriptionApartmentFactory.swift in Sources */,
 				2025B42B29ABC74900A65D29 /* AppDelegate.swift in Sources */,
 				2068EE4529B4C8BF00B004A7 /* LoginViewController.swift in Sources */,
-				2054C7A029C221A60015718C /* FullDescriptionApartamentViewController.swift in Sources */,
+				2054C7A029C221A60015718C /* FullDescriptionApartmentViewController.swift in Sources */,
 				206334B829ACC221009D6331 /* Constants.swift in Sources */,
 				20E775FE29B8FDBD00E68AA1 /* MoreInfoCoordinator.swift in Sources */,
 				206B514029BCBE5F00DEC657 /* Alert.swift in Sources */,
@@ -632,15 +730,17 @@
 				20CA681429AFBC4900CEF612 /* Images.swift in Sources */,
 				2068EE4929B4C94500B004A7 /* LoginView.swift in Sources */,
 				20E775FC29B8FD9D00E68AA1 /* MoreInfoViewController.swift in Sources */,
-				2054C7A429C221FC0015718C /* FullDescriptionApartamentView.swift in Sources */,
+				2054C7A429C221FC0015718C /* FullDescriptionApartmentView.swift in Sources */,
+				200CDCEF29DC50810081A5ED /* FirebaseService.swift in Sources */,
 				206334A529ACA409009D6331 /* CustomNavigationTitle.swift in Sources */,
 				20A4026929B4AC1B00D5F3B0 /* HomeCoordinator.swift in Sources */,
-				206334B029ACBC50009D6331 /* ApartamentData.swift in Sources */,
+				206334B029ACBC50009D6331 /* ApartmentData.swift in Sources */,
 				206334B329ACBD6F009D6331 /* HomeFactory.swift in Sources */,
 				202C8C4129B7EAAC00C6B240 /* SearchCoordinator.swift in Sources */,
+				20150A1129F02EDE00641D1F /* AuthManager.swift in Sources */,
 				2025B42D29ABC74900A65D29 /* SceneDelegate.swift in Sources */,
 				2063349C29AC71BB009D6331 /* ProfileViewController.swift in Sources */,
-				2063349A29AC71AF009D6331 /* LikedViewController.swift in Sources */,
+				2063349A29AC71AF009D6331 /* FavoriteViewController.swift in Sources */,
 				204AD65329B53C2F001AC598 /* ProfileViewModel.swift in Sources */,
 				2025B43F29ABCAC100A65D29 /* HomeViewController.swift in Sources */,
 				2068EE4B29B4CE4C00B004A7 /* LoginInspector.swift in Sources */,
@@ -781,6 +881,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PodKrishey/PodKrishey.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHPV38N7M5;
@@ -809,6 +910,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PodKrishey/PodKrishey.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QHPV38N7M5;
@@ -854,6 +956,68 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+		203C94AB29E724DD003E0B94 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		200CDCE029DC50640081A5ED /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		200CDCE229DC50640081A5ED /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		200CDCE429DC50640081A5ED /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		200CDCE629DC50640081A5ED /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		200CDCE829DC50640081A5ED /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		200CDCEA29DC50640081A5ED /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		200CDCEC29DC50640081A5ED /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CDCDF29DC50640081A5ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		203C94AC29E724DD003E0B94 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 203C94AB29E724DD003E0B94 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2025B41F29ABC74900A65D29 /* Project object */;
 }

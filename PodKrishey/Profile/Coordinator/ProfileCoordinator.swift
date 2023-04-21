@@ -1,7 +1,8 @@
 import UIKit
 
 protocol ProfileOuput {
-    func goToMoreInfo()
+    func goToMoreInfoController()
+    func goToLoginController()
 }
 
 
@@ -24,10 +25,18 @@ final class ProfileCoordinator {
         let coordinator = MoreInfoCoordinator(navigationController: navigationController, profileModel: profileModel)
         coordinator.show()
     }
+    
+    fileprivate func showLoginController() {
+        navigationController.popViewController(animated: true)
+    }
 }
 
 extension ProfileCoordinator: ProfileOuput {
-    func goToMoreInfo() {
+    func goToMoreInfoController() {
         showMoreInfo()
+    }
+    
+    func goToLoginController() {
+        showLoginController()
     }
 }

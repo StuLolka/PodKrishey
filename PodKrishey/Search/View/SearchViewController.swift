@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class SearchViewController: UIViewController {
     var output: SearchOutput?
@@ -15,10 +16,6 @@ final class SearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //    override func loadView() {
-    //        view = mainView
-    //    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -31,24 +28,30 @@ final class SearchViewController: UIViewController {
         mainView.clipsToBounds = true
         mainView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            mainView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mainView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 2)
-        ])
+        mainView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height / 2)
+        }
         
         mainView.searchAction = output?.searchButtonTouched
         mainView.resetAction = output?.resetButtonTouched
         mainView.priceErrorAction = showNotification
         mainView.backgroundColor = .Global.backgroundViewController
         navigationItem.titleView = CustomNavigationTitle(title: .Search.title)
+        
+        addTapToDismiss()
+    }
+    
+    private func addTapToDismiss() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissView))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissView() {
+        output?.tapToDismiss()
     }
     
     private func showNotification() {
-//        let navBarOriginY = navigationController?.navigationBar.frame.origin.y ?? 47
-//        let navBarHeight = navigationController?.navigationBar.frame.height ?? 44
-        
         UIView.animate(withDuration: 0.3, delay: 0.1) {
             self.mainView.changeNotificationFrame(CGRect(x: 10, y: 10, width: Constants.Profile.notificationWidth, height: Constants.Profile.notificationHeight))
             self.view.layoutIfNeeded()

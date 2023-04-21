@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 final class LoginView: UIView, LoginViewProtocol {
     var loginAction: ((_ login: String?, _ password: String?) -> ())?
@@ -24,7 +25,7 @@ final class LoginView: UIView, LoginViewProtocol {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
         textField.translatesAutoresizingMaskIntoConstraints = false
         
-        textField.text = LoginInspector.getTrueValuesTest().0
+        textField.text = LoginInspector.shared.getTrueValuesTest().0
         return textField
     }()
     
@@ -41,7 +42,7 @@ final class LoginView: UIView, LoginViewProtocol {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
         textField.translatesAutoresizingMaskIntoConstraints = false
         
-        textField.text = LoginInspector.getTrueValuesTest().1
+        textField.text = LoginInspector.shared.getTrueValuesTest().1
         return textField
     }()
     

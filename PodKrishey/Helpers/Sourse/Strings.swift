@@ -1,7 +1,7 @@
 import Foundation
 
 extension String {
-    enum ApartamentsData {
+    enum ApartmentsData {
         static let apart1 = """
 Adding Equatable conformance to your custom types means that you can use more convenient APIs when searching for particular instances in a collection. Equatable is also the base protocol for the Hashable and Comparable protocols, which allow more uses of your custom type, such as constructing sets or sorting the elements of a collection.
 You can rely on automatic synthesis of the Equatable protocol’s requirements for a custom type when you declare Equatable conformance in the type’s original declaration and your type meets these criteria:
@@ -53,10 +53,29 @@ Scikit-Learn базируется на библиотеке SciPy, котору�
     enum Search {
         static let title = "Поиск"
     }
-    enum Liked {
+    enum Favorite {
         static let title = "Понравившиеся"
+        static let none = "Вы не добавили ни одной квартиры в избранное"
+        static let notAuth = "Чтобы просматривать избранные, войдите в личный кабинет"
+        static let city = "Город: Москва"
+        static let numberOfRooms = "Количество комнат"
+        static let price = "Цена"
+        static let from = "от"
+        static let to = "до"
+        static let show = "Показать"
+        static let reset = "Очистить"
+        static let priceError = "Цена ДО не может быть меньше цены ОТ"
     }
     enum Profile {
         static let title = "Профиль"
+        static let signOut = "Выйти"
+    }
+    
+    enum Login {
+        static let title = "Войти"
+    }
+    
+    enum ProfileView {
+        static let changeAvatar = "Изменить фотографию профиля"
     }
 }

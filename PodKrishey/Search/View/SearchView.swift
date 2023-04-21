@@ -17,7 +17,7 @@ final class SearchView: UIView, SearchViewProtocol {
     
     private lazy var pickCityButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Город: Москва", for: .normal)
+        button.setTitle(.Favorite.city, for: .normal)
         button.backgroundColor = .Global.blueGray
         button.setTitleColor(.black, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ final class SearchView: UIView, SearchViewProtocol {
     
     private lazy var numberOfRoomsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Количество комнат"
+        label.text = .Favorite.numberOfRooms
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,13 +57,13 @@ final class SearchView: UIView, SearchViewProtocol {
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Цена"
+        label.text = .Favorite.price
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var fromPriceView = PriceTextFieldView(title: "от")
-    private lazy var toPriceView = PriceTextFieldView(title: "до")
+    private lazy var fromPriceView = PriceTextFieldView(title: .Favorite.from)
+    private lazy var toPriceView = PriceTextFieldView(title: .Favorite.to)
     
     private lazy var priceStackView: UIStackView = {
         let stackView = UIStackView()
@@ -85,7 +85,7 @@ final class SearchView: UIView, SearchViewProtocol {
     
     private lazy var searchButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Показать", for: .normal)
+        button.setTitle(.Favorite.show, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 17)
         button.backgroundColor = .Global.blueButton
         button.setTitleColor(.black, for: .normal)
@@ -98,7 +98,7 @@ final class SearchView: UIView, SearchViewProtocol {
     
     private lazy var resetButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Очистить", for: .normal)
+        button.setTitle(.Favorite.reset, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 17)
         button.backgroundColor = .Global.blueButton
         button.setTitleColor(.black, for: .normal)
@@ -120,7 +120,7 @@ final class SearchView: UIView, SearchViewProtocol {
     }()
     
     private lazy var notificationView: NotificationView = {
-        let notificationView = NotificationView(title: "Цена ДО не может быть меньше цены ОТ")
+        let notificationView = NotificationView(title: .Favorite.priceError)
         notificationView.frame = CGRect(x: 10, y: -Constants.Profile.notificationHeight, width: Constants.Profile.notificationWidth, height: Constants.Profile.notificationHeight)
         notificationView.backgroundColor = .systemGray6
         notificationView.layer.cornerRadius = 10
@@ -168,8 +168,62 @@ final class SearchView: UIView, SearchViewProtocol {
     }
     
     private func setupView() {
-//        addSubviews(pickCityButton, roomsView, priceView, buttonsStackView, notificationView)
         addSubviews(pickCityButton, roomsView, priceView, buttonsStackView)
+    
+        pickCityButton.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(50)
+        }
+        
+        roomsView.snp.makeConstraints { make in
+            make.top.equalTo(pickCityButton.snp_bottomMargin)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        numberOfRoomsLabel.snp.makeConstraints { make in
+            make.top.equalTo(roomsView.snp_topMargin).inset(8)
+            make.centerX.equalTo(roomsView.snp_centerXWithinMargins)
+        }
+        
+        roomsButtonStackView.snp.makeConstraints { make in
+            make.top.equalTo(numberOfRoomsLabel.snp_bottomMargin).offset(18)
+            make.leading.trailing.equalTo(roomsView).inset(18)
+            make.bottom.equalTo(roomsView.snp_bottomMargin).inset(18)
+        }
+        
+        priceView.snp.makeConstraints { make in
+            make.top.equalTo(roomsView.snp_bottomMargin).offset(18)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(priceView).inset(8)
+            make.centerX.equalTo(priceView)
+        }
+        
+        priceStackView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalTo(priceView).inset(18)
+        }
+        
+        buttonsStackView.snp.makeConstraints { make in
+            make.top.equalTo(priceView.snp_bottomMargin).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        
+        searchButton.snp.makeConstraints { make in
+            make.height.equalTo(35)
+            make.width.equalTo(150)
+        }
+        
+        resetButton.snp.makeConstraints { make in
+            make.height.width.equalTo(searchButton)
+        }
+        
+        addTapToHideKeyboard()
+        addRoomsButtonsActions()
+    }
+    
+    private func addRoomsButtonsActions() {
         oneRoomButton.action = {
             if self.roomsSelected.contains(1) {
                 self.roomsSelected.remove(1)
@@ -209,53 +263,14 @@ final class SearchView: UIView, SearchViewProtocol {
                 self.roomsSelected.insert(5)
             }
         }
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        addGestureRecognizer(tap)
-        
-        NSLayoutConstraint.activate([
-            pickCityButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            pickCityButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            pickCityButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            pickCityButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            roomsView.topAnchor.constraint(equalTo: pickCityButton.bottomAnchor, constant: 18),
-            roomsView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            roomsView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            numberOfRoomsLabel.centerXAnchor.constraint(equalTo: roomsView.centerXAnchor),
-            numberOfRoomsLabel.topAnchor.constraint(equalTo: roomsView.topAnchor, constant: 8),
-            
-            roomsButtonStackView.leadingAnchor.constraint(equalTo: roomsView.leadingAnchor, constant: 18),
-            roomsButtonStackView.trailingAnchor.constraint(equalTo: roomsView.trailingAnchor, constant: -18),
-            roomsButtonStackView.topAnchor.constraint(equalTo: numberOfRoomsLabel.bottomAnchor, constant: 18),
-            roomsButtonStackView.bottomAnchor.constraint(equalTo: roomsView.bottomAnchor, constant: -18),
-            
-            priceView.topAnchor.constraint(equalTo: roomsView.bottomAnchor, constant: 18),
-            priceView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            priceView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            priceLabel.topAnchor.constraint(equalTo: priceView.topAnchor, constant: 8),
-            priceLabel.centerXAnchor.constraint(equalTo: priceView.centerXAnchor),
-            
-            priceStackView.leadingAnchor.constraint(equalTo: priceView.leadingAnchor, constant: 18),
-            priceStackView.trailingAnchor.constraint(equalTo: priceView.trailingAnchor, constant: -18),
-            priceStackView.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 18),
-            priceStackView.bottomAnchor.constraint(equalTo: priceView.bottomAnchor, constant: -18),
-            
-            buttonsStackView.topAnchor.constraint(equalTo: priceView.bottomAnchor, constant: 24),
-            buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            searchButton.widthAnchor.constraint(equalToConstant: 150),
-            searchButton.heightAnchor.constraint(equalToConstant: 35),
-            
-            resetButton.widthAnchor.constraint(equalTo: searchButton.widthAnchor),
-            resetButton.heightAnchor.constraint(equalTo: searchButton.heightAnchor),
-        ])
     }
     
-    @objc func tapAction() {
+    private func addTapToHideKeyboard() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        addGestureRecognizer(tap)
+    }
+    
+    @objc private func hideKeyboard() {
         endEditing(true)
     }
 }

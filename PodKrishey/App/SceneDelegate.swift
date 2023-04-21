@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -27,9 +28,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         let tabBarController = UITabBarController()
         let coordinator = AppCoordinator(navigationController: tabBarController)
+        
+//        FirebaseApp.configure()
+        
+//        var filePath = Bundle.main.path(forResource: "GoogleService-Info-Auth", ofType: "plist")
+//        guard let fileopts = FirebaseOptions(contentsOfFile: filePath!)
+//          else { assert(false, "Couldn't load config file") }
+//        FirebaseApp.configure(options: fileopts)
+//
+//        FirebaseApp.
+
+        let filePath = Bundle.main.path(forResource: "GoogleService-Info-Base", ofType: "plist")
+        guard let fileopts2 = FirebaseOptions(contentsOfFile: filePath!)
+          else { assert(false, "Couldn't load config file") }
+        FirebaseApp.configure(options: fileopts2)
+        
         coordinator.start()
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
+
 }
 

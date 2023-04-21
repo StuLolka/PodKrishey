@@ -2,7 +2,7 @@ import UIKit
 
 protocol HomeOutput {
     func searchButtonTouched(homeModelDelegate: HomeViewModelProtocol)
-    func apartamentSelected(apartament: HomeDataModel)
+    func apartamentSelected(apartament: ApartmentModel)
 }
 
 final class HomeCoordinator {
@@ -19,8 +19,8 @@ final class HomeCoordinator {
         searchCoordinator.show()
     }
     
-    fileprivate func showFullDescriptionViewController(apartament: HomeDataModel) {
-        let coordinator = FullDescriptionApartamentCoordinator(navigationController: navigationController, apartament: apartament)
+    fileprivate func showFullDescriptionViewController(apartament: ApartmentModel) {
+        let coordinator = FullDescriptionApartmentCoordinator(navigationController: navigationController, apartment: apartament)
         coordinator.show()
     }
 }
@@ -30,7 +30,7 @@ extension HomeCoordinator: HomeOutput {
         showSearchViewController(homeModelDelegate: homeModelDelegate)
     }
     
-    func apartamentSelected(apartament: HomeDataModel) {
+    func apartamentSelected(apartament: ApartmentModel) {
         showFullDescriptionViewController(apartament: apartament)
     }
 }

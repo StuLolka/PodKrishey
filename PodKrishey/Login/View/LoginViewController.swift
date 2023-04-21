@@ -22,11 +22,6 @@ final class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setViewModel(viewModel: LoginViewModelProtocol?) {
-        self.viewModel = viewModel
-        self.viewModel?.showAlert = showAlert
-    }
-    
     override func loadView() {
         view = mainView
         mainView.loginAction = loginButtonTouched
@@ -35,11 +30,12 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.backgroundColor = .Global.backgroundViewController
+        navigationItem.titleView = CustomNavigationTitle(title: .Login.title)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        smthHappend()
+        showHint()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,7 +46,12 @@ final class LoginViewController: UIViewController {
         timer = nil
     }
     
-    private func smthHappend() {
+    func setViewModel(viewModel: LoginViewModelProtocol?) {
+        self.viewModel = viewModel
+        self.viewModel?.showAlert = showAlert
+    }
+    
+    private func showHint() {
         let navBarOriginY = navigationController?.navigationBar.frame.origin.y ?? 47
         let navBarHeight = navigationController?.navigationBar.frame.height ?? 44
         
@@ -61,8 +62,7 @@ final class LoginViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(checkTimer), userInfo: nil, repeats: true)
     }
     
-    @objc func checkTimer() {
-        print("seconds = \(seconds)")
+    @objc private func checkTimer() {
         seconds += 1
         guard seconds == 7 else { return }
         hideNotification()
@@ -79,11 +79,11 @@ final class LoginViewController: UIViewController {
     }
     
     private func loginButtonTouched(_ login: String?, _ password: String?) {
-        viewModel?.checkUser(login: login, password: password)
+        viewModel?.login(login: login, password: password)
     }
     
-    private func showAlert() {
-        let alert = UIAlertController(title: "Неверное имя пользователя или пароль", message: "Попробуйте снова", preferredStyle: .alert)
+    private func showAlert(with error: String) {
+        let alert = UIAlertController(title: error, message: "Попробуйте снова", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ок", style: .default)
         alert.addAction(action)
         present(alert, animated: true)

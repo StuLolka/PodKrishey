@@ -1,55 +1,51 @@
-import Foundation
+import UIKit
 
 protocol HomeViewModelProtocol {
-    var updateView: (([HomeDataModel], _ reloadCollectionView: Bool) -> ())? { get set }
+    var updateView: (([ApartmentModel], _ reloadCollectionView: Bool) -> ())? { get set }
     
     func updateModel(state: HomeViewModelState)
-    func addLikedApartament(model: HomeDataModel)
-    func removeLikedApartament(model: HomeDataModel)
+    func addToFavorite(apartment: ApartmentModel)
     func goToSearchViewController()
-    func showMoreDetails(model: HomeDataModel)
+    func loadImage(_ url: String, _ handler: @escaping (UIImage?) -> ())
+    func showMoreDetails(model: ApartmentModel)
 }
 
 enum HomeViewModelState {
     case initial
+//    case willAppear
     case filter(minPrice: Int, maxPrice: Int, roomNumber: Set<Int>)
     case like
 }
 
 protocol HomeViewModelDelegate {
-    func update(model: [HomeDataModel])
+    func update(model: [ApartmentModel])
 }
 
 final class HomeViewModel: HomeViewModelProtocol {
-    var updateView: (([HomeDataModel], _ reloadCollectionView: Bool) -> ())? 
-//    var updateModel: (([HomeDataModel]) -> ())?
+    var updateView: (([ApartmentModel], _ scrollToTop: Bool) -> ())?
     var output: HomeOutput?
     
     func updateModel(state: HomeViewModelState) {
         switch state {
-        case .initial:
-            updateView?(getData(), true)
-        case .filter(let minPrice, let maxPrice, let roomNumber):
-            print("test minPrice = \(minPrice), maxPrice = \(maxPrice), roomNumber = \(roomNumber)")
-            updateView?(filterApartaments(minPrice: minPrice, maxPrice: maxPrice, numberOfRooms: roomNumber), true)
-        case .like:
-            updateView?(getData(), false)
+        case .initial: getApartments(true)
+            
+//        case .willAppear: getApartments(false)
+            
+        case .filter(let minPrice, let maxPrice, let numberOfRooms):
+            filterApartaments(minPrice: minPrice, maxPrice: maxPrice, numberOfRooms: numberOfRooms) { models in
+                self.updateView?(models, true)
+            }
+            
+        case .like: getApartments(false)
         }
     }
     
-    func addLikedApartament(model: HomeDataModel) {
-        ApartamentData.likedApartaments.append(model)
-        ApartamentData.apartamentWasLiked(apartament: model)
+    func addToFavorite(apartment: ApartmentModel) {
+        FirebaseService.shared.updateApartment(apartment)
         updateModel(state: .like)
     }
     
-    func removeLikedApartament(model: HomeDataModel) {
-        ApartamentData.likedApartaments.removeAll { foundedModel in
-            model == foundedModel
-        }
-    }
-    
-    func showMoreDetails(model: HomeDataModel) {
+    func showMoreDetails(model: ApartmentModel) {
         output?.apartamentSelected(apartament: model)
     }
     
@@ -57,18 +53,37 @@ final class HomeViewModel: HomeViewModelProtocol {
         output?.searchButtonTouched(homeModelDelegate: self)
     }
     
-    private func filterApartaments(minPrice: Int, maxPrice: Int, numberOfRooms: Set<Int>) -> [HomeDataModel] {
-        ApartamentData.apartaments.filter { model in
-            let numberOfRoomsContainsFive = numberOfRooms.contains(5)
-            let roomHasMoreThanOrEqualToFiveRooms = model.numberOfRooms >= 5
-            let modelMustHaveAndHas = numberOfRoomsContainsFive && roomHasMoreThanOrEqualToFiveRooms
-            print("test model.price = \(model.price), minPrice = \(minPrice), maxPrice = \(maxPrice)")
-            return model.price >= minPrice && model.price <= maxPrice && (numberOfRooms.contains(model.numberOfRooms) || modelMustHaveAndHas)
+    func loadImage(_ url: String, _ handler: @escaping (UIImage?) -> ()) {
+        FirebaseService.shared.downloadImage(from: url) { image in
+            DispatchQueue.main.async {
+                handler(image)
+            }
         }
     }
     
-    private func getData() -> [HomeDataModel] {
-        return ApartamentData.apartaments
+    private func getApartments(_ scrollToTop: Bool) {
+        FirebaseService.shared.getApartments { result in
+            switch result {
+            case .success(let apartments): self.updateView?(apartments, scrollToTop)
+            case .failure(let error): print("Fail: \(error.localizedDescription)")
+            }
+        }
     }
     
+    private func filterApartaments(minPrice: Int, maxPrice: Int, numberOfRooms: Set<Int>, handler: @escaping(([ApartmentModel])) -> ()) {
+        FirebaseService.shared.getApartments { result in
+            switch result {
+                case .success(let apartments):
+                    handler(apartments.filter { apartment in
+                        let numberOfRoomsContainsFive = numberOfRooms.contains(5)
+                        let roomHasMoreThanOrEqualToFiveRooms = apartment.numberOfRooms >= 5
+                        let modelMustHaveAndHas = numberOfRoomsContainsFive && roomHasMoreThanOrEqualToFiveRooms
+                        return apartment.price >= minPrice && apartment.price <= maxPrice && (numberOfRooms.contains(apartment.numberOfRooms) || modelMustHaveAndHas)
+                    })
+                case .failure(let error): print("Fail: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+
 }

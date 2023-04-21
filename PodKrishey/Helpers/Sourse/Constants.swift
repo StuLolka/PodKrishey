@@ -2,6 +2,7 @@ import UIKit
 
 enum Constants {
     enum Global {
+        static let collectionID = "UICollectionViewCell"
         static let heightScreen = UIScreen.main.bounds.height
         static let widthScreen = UIScreen.main.bounds.width
     }

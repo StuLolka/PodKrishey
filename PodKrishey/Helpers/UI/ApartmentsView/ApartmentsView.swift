@@ -1,20 +1,20 @@
 import UIKit
 
 protocol HomeViewProtocol: UIView {
-    var likeAction: ((HomeDataModel) -> ())? { get set }
-    var dislikeAction: ((HomeDataModel) -> ())? { get set }
-    var didSelectApartament: ((HomeDataModel) -> ())? { get set }
+    var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())? { get set }
+    var likeAction: ((ApartmentModel) -> ())? { get set }
+    var didSelectApartment: ((ApartmentModel) -> ())? { get set }
     
-//    func updateModel(model: [HomeDataModel])
-    func updateCollectionView(with data: [HomeDataModel], reloadData: Bool)
+    func updateCollectionView(with data: [ApartmentModel], scrollToTop: Bool)
+//    func deleteItemAt(indexPath: IndexPath)
 }
 
-final class HomeView: UIView, HomeViewProtocol {
-    var likeAction: ((HomeDataModel) -> ())?
-    var dislikeAction: ((HomeDataModel) -> ())?
-    var didSelectApartament: ((HomeDataModel) -> ())?
+final class ApartmentsView: UIView, HomeViewProtocol {
+    var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())?
+    var likeAction: ((ApartmentModel) -> ())?
+    var didSelectApartment: ((ApartmentModel) -> ())?
     
-    private var apartaments: [HomeDataModel] = []
+    private var apartaments: [ApartmentModel] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -41,13 +41,17 @@ final class HomeView: UIView, HomeViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateCollectionView(with data: [HomeDataModel], reloadData: Bool = true) {
+    func updateCollectionView(with data: [ApartmentModel], scrollToTop: Bool = true) {
         apartaments = data
-        if reloadData{
+        collectionView.reloadData()
+        if scrollToTop{
             collectionView.setContentOffset(.zero, animated: true)
-            collectionView.reloadData()
         }
     }
+    
+//    func deleteItemAt(indexPath: IndexPath) {
+//        collectionView.deleteItems(at: [indexPath])
+//    }
     
     private func setupView() {
         addSubview(collectionView)
@@ -60,13 +64,13 @@ final class HomeView: UIView, HomeViewProtocol {
     }
 }
 
-extension HomeView: UICollectionViewDelegateFlowLayout {
+extension ApartmentsView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: Constants.Global.widthScreen - 16, height: Constants.Global.heightScreen / 1.8)
     }
 }
 
-extension HomeView: UICollectionViewDataSource {
+extension ApartmentsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         apartaments.count
     }
@@ -75,13 +79,13 @@ extension HomeView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ApartamentCell.id, for: indexPath) as? ApartamentCell else {
             return UICollectionViewCell()
         }
+        cell.loadImage = loadImage
         cell.likeAction = likeAction
-        cell.dislikeAction = dislikeAction
         cell.addData(model: apartaments[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectApartament?(apartaments[indexPath.row])
+        didSelectApartment?(apartaments[indexPath.row])
     }
 }

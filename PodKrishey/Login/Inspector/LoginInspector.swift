@@ -1,20 +1,17 @@
 import Foundation
 
-enum LoginError: Error {
-    case invalidUser
-}
-
-enum LoginInspector {
-    private static let trueLogin = "login"
-    private static let truePassword = "password"
+struct LoginInspector {
+    private let login = "login"
+    private let password = "password"
     
-    static func checkUser(login: String, password: String) throws {
-        if trueLogin != login || truePassword != password {
-            throw LoginError.invalidUser
-        }
+    static let shared = LoginInspector()
+    private init() {}
+    
+    func isLoginAndPasswordCorrect(_ login: String, _ password: String) -> Bool {
+        self.login == login && self.password == password ? true : false
     }
     
-    static func getTrueValuesTest() -> (String, String) {
-        return (trueLogin, truePassword)
+    func getTrueValuesTest() -> (String, String) {
+        return (login, password)
     }
 }
