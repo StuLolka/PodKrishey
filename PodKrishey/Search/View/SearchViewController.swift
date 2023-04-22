@@ -26,7 +26,6 @@ final class SearchViewController: UIViewController {
         view.addSubview(mainView)
         mainView.layer.cornerRadius = 10
         mainView.clipsToBounds = true
-        mainView.translatesAutoresizingMaskIntoConstraints = false
         
         mainView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()

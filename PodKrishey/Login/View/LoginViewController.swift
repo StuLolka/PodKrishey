@@ -83,8 +83,8 @@ final class LoginViewController: UIViewController {
     }
     
     private func showAlert(with error: String) {
-        let alert = UIAlertController(title: error, message: "Попробуйте снова", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ок", style: .default)
+        let alert = UIAlertController(title: error, message: .Login.alertMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: .Login.alertActionTitle, style: .default)
         alert.addAction(action)
         present(alert, animated: true)
     }

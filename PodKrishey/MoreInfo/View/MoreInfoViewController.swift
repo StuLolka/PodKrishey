@@ -35,7 +35,7 @@ class MoreInfoViewController: UIViewController {
         navigationItem.rightBarButtonItem = edit
     }
     
-    @objc func editTouched() {
+    @objc private func editTouched() {
         
     }
 }

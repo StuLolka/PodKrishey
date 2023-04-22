@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 protocol ProfileViewProtocol: UIView {
     var userViewAction: (() -> ())? { get set }
@@ -10,7 +11,6 @@ final class ProfileView: UIView, ProfileViewProtocol {
     private lazy var userView: CustomButton = {
         let view = CustomButton()
         view.backgroundColor = .Global.blueGray
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -34,13 +34,11 @@ final class ProfileView: UIView, ProfileViewProtocol {
     private func setupView() {
         addSubviews(userView)
         
-        NSLayoutConstraint.activate([
-            userView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            userView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            userView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            userView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 4)
-            
-        ])
+        userView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height / 4)
+        }
     }
     
 }

@@ -19,9 +19,9 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.loadImage = viewModel?.loadImage(_:_:)
+        mainView.loadImage = viewModel?.loadImage(_:apartmentID:_:)
         
-        mainView.likeAction = addFavoriteApartment(model:)
+        mainView.addToFavoriteAction = addFavoriteApartment(model:)
         mainView.didSelectApartment = { item in
             self.viewModel?.showMoreDetails(model: item)
         }
@@ -34,7 +34,7 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        viewModel?.updateModel(state: .willAppear)
+        viewModel?.updateModel(state: .willAppear)
     }
 
     
@@ -50,7 +50,7 @@ final class HomeViewController: UIViewController {
         viewModel?.updateModel(state: .initial)
     }
     
-    @objc func searchButtonTouched() {
+    @objc private func searchButtonTouched() {
         viewModel?.goToSearchViewController()
     }
     

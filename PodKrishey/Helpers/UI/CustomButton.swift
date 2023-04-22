@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class CustomButton: UIView {
     var action: (() -> ())?
@@ -8,7 +9,6 @@ final class CustomButton: UIView {
         image.tintColor = .black
         image.layer.cornerRadius = Constrains.cornerAvatarImage
         image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -16,7 +16,6 @@ final class CustomButton: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 40)
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -24,7 +23,6 @@ final class CustomButton: UIView {
         let image = UIImageView()
         image.tintColor = .black
         image.image = UIImage(systemName: "greaterthan")
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -37,19 +35,7 @@ final class CustomButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    init(avatar: UIImage?, title: String, action: @escaping (() -> ())) {
-//        self.action = action
-//        super.init(frame: .zero)
-//        setupView()
-//        self.avatarImageView.image = avatar
-//        self.nameLabel.text = title
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
-    @objc func tap() {
+    @objc private func tap() {
         action?()
     }
     
@@ -58,23 +44,23 @@ final class CustomButton: UIView {
         addSubviews(avatarImageView, nameLabel, itemImageView)
         addGestureRecognizer(tap)
         
-        NSLayoutConstraint.activate([
-            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
-            avatarImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            avatarImageView.widthAnchor.constraint(equalToConstant: Constrains.avatarImageViewWidth),
-            avatarImageView.heightAnchor.constraint(equalToConstant: Constrains.avatarImageViewWidth),
-//            avatarImageView.wi
-//            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-//            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 8),
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: itemImageView.leadingAnchor, constant: -8),
-            
-            itemImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
-            itemImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            itemImageView.widthAnchor.constraint(equalToConstant: 20)
-        ])
+        avatarImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(18)
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(Constrains.avatarImageViewWidth)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.leading.equalTo(avatarImageView.snp_trailingMargin).offset(8)
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(itemImageView.snp_leadingMargin).offset(8)
+        }
+        
+        itemImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(18)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(20)
+        }
     }
 }
 

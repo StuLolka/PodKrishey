@@ -1,11 +1,11 @@
 import UIKit
+import SnapKit
 
 final class NotificationView: UIView {
     private lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -21,11 +21,9 @@ final class NotificationView: UIView {
     
     private func setupView() {
         addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-        ])
+        label.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
+//            make.top.leading.trailing.bottom.equalToSuperview().offset(8)
+        }
     }
 }

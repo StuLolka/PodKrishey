@@ -1,23 +1,20 @@
 import UIKit
+import SnapKit
+
 
 final class ApartamentCell: UICollectionViewCell {
     static let id = "ApartamentCell"
     
-    var likeAction: ((ApartmentModel) -> ())?
-    var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())?
+    var addToFavoriteAction: ((ApartmentModel) -> ())?
+    var loadImage: ((String, String, (@escaping (UIImage?) -> ()))  -> ())?
     
     private var model: ApartmentModel?
     
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private lazy var imageView = UIImageView()
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -25,16 +22,14 @@ final class ApartamentCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 18)
         label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var likeButton: UIButton = {
+    private lazy var addToFavoriteButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(.Home.heart, for: .normal)
         button.tintColor = .red
-        button.addTarget(self, action: #selector(likeButtonTouched), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addToFavoriteButtonTouched), for: .touchUpInside)
         return button
     }()
     
@@ -56,41 +51,46 @@ final class ApartamentCell: UICollectionViewCell {
     
     func addData(model: ApartmentModel) {
         self.model = model
-        model.isFavorite ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
+        model.isFavorite ? addToFavoriteButton.setBackgroundImage(.Home.heartFill, for: .normal) : addToFavoriteButton.setBackgroundImage(.Home.heart, for: .normal)
         descriptionLabel.text = model.shortDescription
         if let firstImage = model.imageNames.first {
-            loadImage?(firstImage) { image in
+            loadImage?(firstImage, model.id) { image in
                 self.imageView.image = image
             }
         }
         priceLabel.text = (formatter.string(from: NSNumber(value: model.price)) ?? "") + " ₽"
     }
     
-    @objc private func likeButtonTouched() {
+    @objc private func addToFavoriteButtonTouched() {
         guard let model = model else { return }
-        likeAction?(model)
-        !model.isFavorite ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
+        addToFavoriteAction?(model)
+        !model.isFavorite ? addToFavoriteButton.setBackgroundImage(.Home.heartFill, for: .normal) : addToFavoriteButton.setBackgroundImage(.Home.heart, for: .normal)
     }
     
     private func setupView() {
-        addSubviews(imageView, descriptionLabel, priceLabel, likeButton)
+        addSubviews(imageView, descriptionLabel, priceLabel, addToFavoriteButton)
         
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            imageView.heightAnchor.constraint(equalToConstant: Constants.Global.heightScreen / 2.5),
-            
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            
-            priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            priceLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
-            
-            likeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            likeButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 13),
-            likeButton.heightAnchor.constraint(equalToConstant: 30),
-            likeButton.widthAnchor.constraint(equalToConstant: 30),
-        ])
+        imageView.snp.makeConstraints { make in
+            make.top.equalTo(snp_topMargin).inset(8)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(Constants.Global.heightScreen / 2.5)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp_bottomMargin).offset(8)
+            make.leading.equalToSuperview()
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp_bottomMargin).offset(8)
+            make.leading.equalToSuperview()
+        }
+        
+        addToFavoriteButton.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp_bottomMargin).offset(13)
+            make.trailing.equalToSuperview().inset(8)
+            make.height.width.equalTo(30)
+        }
+ 
     }
 }

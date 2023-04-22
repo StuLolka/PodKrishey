@@ -1,10 +1,10 @@
 import UIKit
+import SnapKit
 
 final class ImagesApartmentCell: UICollectionViewCell {
     static let id = "ImagesApartmentCell"
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -20,11 +20,8 @@ final class ImagesApartmentCell: UICollectionViewCell {
     private func setupView() {
         addSubview(imageView)
         
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }

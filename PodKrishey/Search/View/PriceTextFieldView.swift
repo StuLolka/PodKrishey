@@ -1,11 +1,15 @@
 import UIKit
+import SnapKit
 
 final class PriceTextFieldView: UIStackView {
-    private lazy var title = UILabel()
+    private lazy var title: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        return label
+    }()
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .numberPad
         textField.borderStyle = .none
         textField.delegate = self
@@ -15,14 +19,14 @@ final class PriceTextFieldView: UIStackView {
     
     private lazy var rubleLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.text = "₽"
         return label
     }()
     
     private lazy var bottomLine: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .darkGray
         return view
     }()
     
@@ -56,14 +60,15 @@ final class PriceTextFieldView: UIStackView {
         spacing = 10
         addSubview(bottomLine)
         addArrangedSubviews(self.title, textField, rubleLabel)
-        NSLayoutConstraint.activate([
-            textField.widthAnchor.constraint(equalToConstant: 90),
-            
-            bottomLine.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomLine.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomLine.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomLine.heightAnchor.constraint(equalToConstant: 1.5)
-        ])
+        
+        textField.snp.makeConstraints { make in
+            make.width.equalTo(90)
+        }
+        
+        bottomLine.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(1.5)
+        }
     }
 }
 

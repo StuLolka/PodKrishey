@@ -1,7 +1,7 @@
 import UIKit
 
 protocol FullDescriptionApartmentViewProtocol: UIView {
-    var likeAction: (() -> ())? { get set }
+    var addToFavoriteAction: (() -> ())? { get set }
     var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())? { get set }
     
     func setModel(model: ApartmentModel)
@@ -36,7 +36,7 @@ final class FullDescriptionApartmentViewController: UIViewController {
         self.viewModel?.update()
         
         mainView.loadImage = self.viewModel?.loadImage
-        mainView.likeAction = self.viewModel?.addToFavorite
+        mainView.addToFavoriteAction = self.viewModel?.addToFavorite
     }
     
     private func setupView(model: ApartmentModel) {

@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 final class FullDescriptionApartmentView: UIView, FullDescriptionApartmentViewProtocol {
-    var likeAction: (() -> ())?
+    var addToFavoriteAction: (() -> ())?
     var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())?
     private var model: ApartmentModel?
     private var imageNames: [String] = []
@@ -20,10 +20,16 @@ final class FullDescriptionApartmentView: UIView, FullDescriptionApartmentViewPr
         return collectionView
     }()
     
-    private lazy var shortDescriptionLabel = UILabel()
+    private lazy var shortDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .italicSystemFont(ofSize: 16)
+        label.textColor = .black
+        return label
+    }()
 
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.font = .boldSystemFont(ofSize: 18)
         return label
     }()
@@ -38,30 +44,36 @@ final class FullDescriptionApartmentView: UIView, FullDescriptionApartmentViewPr
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "phone.fill"), for: .normal)
         button.tintColor = .black
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var likeButton: UIButton = {
+    private lazy var addToFavoriteButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(.Home.heart, for: .normal)
         button.tintColor = .red
-        button.addTarget(self, action: #selector(likeButtonTouched), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(addToFavoriteButtonTouched), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var blueView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        view.backgroundColor = .Global.blueGray
+        return view
     }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .Global.blueGray
         stackView.spacing = 10
-        stackView.addArrangedSubviews(phoneNumberLabel, phoneButton, likeButton)
+        stackView.addArrangedSubviews(phoneNumberLabel, phoneButton, addToFavoriteButton)
         return stackView
     }()
     
     private lazy var fullDescriptionLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
         return label
@@ -94,7 +106,7 @@ final class FullDescriptionApartmentView: UIView, FullDescriptionApartmentViewPr
         priceLabel.text = (formatter.string(from: NSNumber(value: model.price)) ?? "") + " ₽"
         phoneNumberLabel.text = model.phoneNumber
         fullDescriptionLabel.text = model.fullDescription
-        model.isFavorite ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
+        model.isFavorite ? addToFavoriteButton.setBackgroundImage(.Home.heartFill, for: .normal) : addToFavoriteButton.setBackgroundImage(.Home.heart, for: .normal)
         imagesCollectionView.reloadData()
     }
     
@@ -102,19 +114,20 @@ final class FullDescriptionApartmentView: UIView, FullDescriptionApartmentViewPr
         scrollView.contentSize = CGSize(width: contentView.bounds.width, height: contentView.bounds.height)
     }
     
-    @objc private func likeButtonTouched() {
-        likeAction?()
+    @objc private func addToFavoriteButtonTouched() {
+        addToFavoriteAction?()
         guard let model = model else { return }
-        !model.isFavorite ? likeButton.setBackgroundImage(.Home.heartFill, for: .normal) : likeButton.setBackgroundImage(.Home.heart, for: .normal)
+        !model.isFavorite ? addToFavoriteButton.setBackgroundImage(.Home.heartFill, for: .normal) : addToFavoriteButton.setBackgroundImage(.Home.heart, for: .normal)
     }
     
     private func setupView() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
+        blueView.addSubview(stackView)
         contentView.addSubviews(imagesCollectionView,
                                 shortDescriptionLabel,
                                 priceLabel,
-                                stackView,
+                                blueView,
                                 fullDescriptionLabel)
         
         scrollView.snp.makeConstraints { make in
@@ -132,26 +145,31 @@ final class FullDescriptionApartmentView: UIView, FullDescriptionApartmentViewPr
         }
         
         shortDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(imagesCollectionView.snp_bottomMargin).offset(8)
+            make.top.equalTo(imagesCollectionView.snp_bottomMargin).offset(16)
             make.leading.trailing.equalTo(imagesCollectionView)
         }
         
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(shortDescriptionLabel.snp_bottomMargin).offset(8)
+            make.top.equalTo(shortDescriptionLabel.snp_bottomMargin).offset(16)
             make.leading.trailing.equalTo(imagesCollectionView)
         }
         
-        stackView.snp.makeConstraints { make in
+        blueView.snp.makeConstraints { make in
             make.top.equalTo(priceLabel.snp_bottomMargin).offset(16)
             make.leading.trailing.equalTo(imagesCollectionView)
         }
         
-        phoneButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
+        stackView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(blueView)
+            make.leading.trailing.equalTo(blueView).inset(8)
         }
         
-        likeButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
+        phoneButton.snp.makeConstraints { make in
+            make.width.height.equalTo(45)
+        }
+        
+        addToFavoriteButton.snp.makeConstraints { make in
+            make.width.height.equalTo(45)
         }
         
         fullDescriptionLabel.snp.makeConstraints { make in

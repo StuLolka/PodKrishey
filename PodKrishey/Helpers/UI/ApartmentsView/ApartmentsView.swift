@@ -1,8 +1,9 @@
 import UIKit
+import SnapKit
 
 protocol HomeViewProtocol: UIView {
-    var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())? { get set }
-    var likeAction: ((ApartmentModel) -> ())? { get set }
+    var loadImage: ((String, String, (@escaping (UIImage?) -> ()))  -> ())? { get set }
+    var addToFavoriteAction: ((ApartmentModel) -> ())? { get set }
     var didSelectApartment: ((ApartmentModel) -> ())? { get set }
     
     func updateCollectionView(with data: [ApartmentModel], scrollToTop: Bool)
@@ -10,8 +11,8 @@ protocol HomeViewProtocol: UIView {
 }
 
 final class ApartmentsView: UIView, HomeViewProtocol {
-    var loadImage: ((String, (@escaping (UIImage?) -> ()))  -> ())?
-    var likeAction: ((ApartmentModel) -> ())?
+    var loadImage: ((String, String, (@escaping (UIImage?) -> ()))  -> ())?
+    var addToFavoriteAction: ((ApartmentModel) -> ())?
     var didSelectApartment: ((ApartmentModel) -> ())?
     
     private var apartaments: [ApartmentModel] = []
@@ -22,8 +23,7 @@ final class ApartmentsView: UIView, HomeViewProtocol {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.Global.collectionID)
         collectionView.register(ApartamentCell.self, forCellWithReuseIdentifier: ApartamentCell.id)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -49,18 +49,12 @@ final class ApartmentsView: UIView, HomeViewProtocol {
         }
     }
     
-//    func deleteItemAt(indexPath: IndexPath) {
-//        collectionView.deleteItems(at: [indexPath])
-//    }
-    
     private func setupView() {
         addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-        ])
+        collectionView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+        }
     }
 }
 
@@ -77,10 +71,11 @@ extension ApartmentsView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ApartamentCell.id, for: indexPath) as? ApartamentCell else {
-            return UICollectionViewCell()
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Global.collectionID, for: indexPath) as UICollectionViewCell
+            return cell
         }
         cell.loadImage = loadImage
-        cell.likeAction = likeAction
+        cell.addToFavoriteAction = addToFavoriteAction
         cell.addData(model: apartaments[indexPath.row])
         return cell
     }

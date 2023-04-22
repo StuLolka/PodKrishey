@@ -2,7 +2,7 @@ import UIKit
 
 enum FavoriteViewModelState {
     case willAppear
-    case like
+    case removeFromFavorite
 }
 
 protocol FavoriteViewModelProtocol {
@@ -19,26 +19,29 @@ final class FavoriteViewModel: FavoriteViewModelProtocol {
     
     func updateModel(state: FavoriteViewModelState) {
         let favoriteApartments = FirebaseService.shared.getFavoriteApartments()
+        
         print("test favoriteApartments = \(favoriteApartments)")
+        
+        guard AuthManager.shared.getIsLoggedIn() else {
+            setErrorView?(.Favorite.notAuth)
+            return
+        }
+        if favoriteApartments.isEmpty {
+            setErrorView?(.Favorite.none)
+            return
+        }
+        
         switch state {
         case .willAppear:
-            guard AuthManager.shared.getIsLoggedIn() else {
-                setErrorView?(.Favorite.notAuth)
-                return
-            }
-            if favoriteApartments.isEmpty {
-                setErrorView?(.Favorite.none)
-                return
-            }
             self.updateView?(favoriteApartments, true)
             
-        case .like:
+        case .removeFromFavorite:
             self.updateView?(favoriteApartments, false)
         }
     }
     
     func removeFromFavorite(apartment: ApartmentModel) {
         FirebaseService.shared.updateApartment(apartment)
-        updateModel(state: .like)
+        updateModel(state: .removeFromFavorite)
     }
 }

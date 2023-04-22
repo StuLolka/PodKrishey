@@ -20,27 +20,25 @@ final class SearchView: UIView, SearchViewProtocol {
         button.setTitle(.Favorite.city, for: .normal)
         button.backgroundColor = .Global.blueGray
         button.setTitleColor(.black, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var numberOfRoomsLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.text = .Favorite.numberOfRooms
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var oneRoomButton = NumberOfRoomsButton(title: "1", size: 40, color: .black)
-    private lazy var twoRoomButton = NumberOfRoomsButton(title: "2", size: 40, color: .black)
-    private lazy var threeRoomButton = NumberOfRoomsButton(title: "3", size: 40, color: .black)
-    private lazy var fourRoomButton = NumberOfRoomsButton(title: "4", size: 40, color: .black)
-    private lazy var fiveRoomButton = NumberOfRoomsButton(title: "5+", size: 40, color: .black)
+    private lazy var oneRoomButton = NumberOfRoomsButton(title: "1")
+    private lazy var twoRoomButton = NumberOfRoomsButton(title: "2")
+    private lazy var threeRoomButton = NumberOfRoomsButton(title: "3")
+    private lazy var fourRoomButton = NumberOfRoomsButton(title: "4")
+    private lazy var fiveRoomButton = NumberOfRoomsButton(title: "5+")
     
     private lazy var roomsButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .equalCentering
         stackView.alignment = .center
         stackView.addArrangedSubviews(oneRoomButton, twoRoomButton, threeRoomButton, fourRoomButton, fiveRoomButton)
@@ -51,14 +49,13 @@ final class SearchView: UIView, SearchViewProtocol {
         let view = UIView()
         view.addSubviews(numberOfRoomsLabel, roomsButtonStackView)
         view.backgroundColor = .Global.blueGray
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.text = .Favorite.price
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -71,7 +68,6 @@ final class SearchView: UIView, SearchViewProtocol {
         stackView.distribution = .equalCentering
         stackView.alignment = .center
         stackView.addArrangedSubviews(fromPriceView, toPriceView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -79,7 +75,6 @@ final class SearchView: UIView, SearchViewProtocol {
         let view = UIView()
         view.addSubviews(priceLabel, priceStackView)
         view.backgroundColor = .Global.blueGray
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -92,7 +87,6 @@ final class SearchView: UIView, SearchViewProtocol {
         button.layer.cornerRadius = 17
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(searchButtonTouched), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -105,7 +99,6 @@ final class SearchView: UIView, SearchViewProtocol {
         button.layer.cornerRadius = 17
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(resetButtonTouched), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -115,7 +108,6 @@ final class SearchView: UIView, SearchViewProtocol {
         stackView.distribution = .equalCentering
         stackView.alignment = .center
         stackView.addArrangedSubviews(searchButton, resetButton)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -155,7 +147,7 @@ final class SearchView: UIView, SearchViewProtocol {
         searchAction?(fromPrice, toPrice, roomsSelected)
     }
     
-    @objc func resetButtonTouched() {
+    @objc private func resetButtonTouched() {
         roomsSelected = []
         resetAction?()
         oneRoomButton.reset()

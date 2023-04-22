@@ -36,16 +36,12 @@ class FirebaseService {
     private let db = Firestore.firestore()
     private let collection = "apartments"
     
-    private var favoriteApartments = [ApartmentModel]()
+    private var apartments: [ApartmentModel] = []
     private init() {}
     
-    func getApartments(handler: @escaping (Result<[ApartmentModel], FirebaseError>) -> ()) {
-        var apartments: [ApartmentModel] = []
-        favoriteApartments = []
-        
+    func downloadApartments(handler: @escaping (Result<[ApartmentModel], FirebaseError>) -> ()) {
         db.collection(collection).getDocuments() { (querySnapshot, error) in
             if let error = error {
-                print("test Error getting documents: \(error.localizedDescription)")
                 handler(.failure(.getDocumentsError(error.localizedDescription)))
                 return
             }
@@ -64,18 +60,21 @@ class FirebaseService {
                 }
                 
                 let model = ApartmentModel(id: id, imageNames: imageNames, shortDescription: shortDescription, fullDescription: fullDescription, price: price, phoneNumber: phoneNumber, numberOfRooms: numberOfRooms, isFavorite: isFavorite)
-                if isFavorite {
-                    self.favoriteApartments.append(model)
-                }
                 self.documents[id] = document.documentID
-                apartments.append(model)
+                self.apartments.append(model)
             }
-            handler(.success(apartments))
+            handler(.success(self.apartments))
         }
     }
     
+    func getApartments() -> [ApartmentModel] {
+        apartments
+    }
+    
     func getFavoriteApartments() -> [ApartmentModel] {
-        favoriteApartments
+        apartments.filter { apartment in
+            apartment.isFavorite
+        }
     }
     
     func updateApartment(_ apartment: ApartmentModel) {
@@ -84,21 +83,19 @@ class FirebaseService {
         let update = [ApartmentField.isFavorite.rawValue : !apartment.isFavorite]
         ref.updateData(update)
         
-        if favoriteApartments.contains(apartment) {
-            favoriteApartments.removeAll { apt in
-                apartment == apt
-            }
+        if let index = apartments.firstIndex(where: { apartmentModel in
+            apartmentModel == apartment
+        }) {
+            apartments[index].isFavorite = !apartments[index].isFavorite
         }
     }
     
     func downloadImage(from urlString: String, handler: @escaping ((UIImage?) -> ())) {
         guard let url = URL(string: urlString) else { return }
-//        print("test Download Started")
-//        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-//            guard let data = data, error == nil else { return }
-//            print(response?.suggestedFilename ?? url.lastPathComponent)
-//            print("test Download Finished")
-//            handler(UIImage(data: data))
-//        }).resume()
+        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            handler(UIImage(data: data))
+        }).resume()
     }
 }

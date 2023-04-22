@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 protocol MoreInfoViewProtocol: UIView {
     func addData(data: ProfileModel)
@@ -8,7 +9,6 @@ final class MoreInfoView: UIView, MoreInfoViewProtocol {
     private lazy var customView: CustomProfileView = {
         let view = CustomProfileView()
         view.backgroundColor = .Global.blueGray
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -29,12 +29,9 @@ final class MoreInfoView: UIView, MoreInfoViewProtocol {
     private func setupView() {
         addSubviews(customView)
         
-        NSLayoutConstraint.activate([
-            customView.topAnchor.constraint(equalTo: topAnchor),
-            customView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            customView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            customView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 4)
-        ])
+        customView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
     }
 }
 

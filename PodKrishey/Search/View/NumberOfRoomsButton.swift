@@ -1,34 +1,35 @@
 import UIKit
+import SnapKit
 
 final class NumberOfRoomsButton: UIButton {
     var action: (() -> ())?
     private var buttonWasSelected = false
     
-    init(title: String, size: CGFloat, color: UIColor) {
+    init(title: String) {
         super.init(frame: .zero)
-        setupButton(title: title, size: size, color: color)
+        setupButton(title: title)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupButton(title: String, size: CGFloat, color: UIColor) {
+    private func setupButton(title: String) {
         setTitle(title, for: .normal)
-        setTitleColor(color, for: .normal)
+        setTitleColor(.darkGray, for: .normal)
         addTarget(self, action: #selector(buttonTouched), for: .touchUpInside)
-        translatesAutoresizingMaskIntoConstraints = false
         
-        widthAnchor.constraint(equalToConstant: size).isActive = true
-        heightAnchor.constraint(equalToConstant: size).isActive = true
+        snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+        }
         
-        layer.cornerRadius = size / 2
-        layer.borderColor = color.cgColor
+        layer.cornerRadius = 40 / 2
+        layer.borderColor = UIColor.darkGray.cgColor
         layer.borderWidth = 1.5
         clipsToBounds = true
     }
     
-    @objc func buttonTouched() {
+    @objc private func buttonTouched() {
         buttonWasSelected.toggle()
         buttonWasSelected ? (buttonWasSelectedAction()) : (buttonWasUnselectedAction())
         action?()

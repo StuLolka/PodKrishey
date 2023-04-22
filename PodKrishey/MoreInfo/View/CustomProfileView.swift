@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 final class CustomProfileView: UIView {
     private lazy var avatarImageView: UIImageView = {
@@ -6,7 +7,6 @@ final class CustomProfileView: UIView {
         image.tintColor = .black
         image.layer.cornerRadius = Constrains.cornerAvatarImage
         image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -17,7 +17,6 @@ final class CustomProfileView: UIView {
         button.titleLabel?.font = .boldSystemFont(ofSize: 23)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.minimumScaleFactor = 0.3
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -37,16 +36,17 @@ final class CustomProfileView: UIView {
     private func setupView() {
         addSubviews(avatarImageView, changeAvatarButton)
         
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            avatarImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            avatarImageView.widthAnchor.constraint(equalToConstant: Constrains.avatarImageViewWidth),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-            
-            changeAvatarButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
-            changeAvatarButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            changeAvatarButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-        ])
+        avatarImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(8)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(Constrains.avatarImageViewWidth)
+            make.height.equalTo(avatarImageView.snp.width)
+        }
+        
+        changeAvatarButton.snp.makeConstraints { make in
+            make.top.equalTo(avatarImageView.snp.bottom).offset(16)
+            make.leading.bottom.trailing.equalToSuperview().inset(8)
+        }
     }
 }
 

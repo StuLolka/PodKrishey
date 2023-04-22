@@ -1,11 +1,12 @@
 import UIKit
 import FirebaseAuth
+import SnapKit
 
 final class LoginView: UIView, LoginViewProtocol {
     var loginAction: ((_ login: String?, _ password: String?) -> ())?
     
     private lazy var notificationView: NotificationView = {
-        let notificationView = NotificationView(title: "Введите логин и пароль, чтобы войти в личный кабинет")
+        let notificationView = NotificationView(title: .Login.notification)
         notificationView.frame = CGRect(x: 10, y: -Constants.Profile.notificationHeight, width: Constants.Profile.notificationWidth, height: Constants.Profile.notificationHeight)
         notificationView.backgroundColor = .systemGray6
         notificationView.layer.cornerRadius = 10
@@ -15,15 +16,15 @@ final class LoginView: UIView, LoginViewProtocol {
     
     private lazy var loginTextField: UITextField = {
         let textField = UITextField()
+        textField.textColor = .black
         textField.layer.borderWidth = 1.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.backgroundColor = .white
-        textField.placeholder = "Номер телефона или почта"
+        textField.placeholder = .Login.loginPlaceholder
         textField.layer.cornerRadius = 4
         textField.clipsToBounds = true
         textField.leftViewMode = .always
         textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
-        textField.translatesAutoresizingMaskIntoConstraints = false
         
         textField.text = LoginInspector.shared.getTrueValuesTest().0
         return textField
@@ -31,16 +32,16 @@ final class LoginView: UIView, LoginViewProtocol {
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
+        textField.textColor = .black
         textField.layer.borderWidth = 1.5
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.backgroundColor = .white
-        textField.placeholder = "Пароль"
+        textField.placeholder = .Login.passwordPlaceholder
         textField.layer.cornerRadius = 4
         textField.clipsToBounds = true
         textField.isSecureTextEntry = true
         textField.leftViewMode = .always
         textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
-        textField.translatesAutoresizingMaskIntoConstraints = false
         
         textField.text = LoginInspector.shared.getTrueValuesTest().1
         return textField
@@ -49,11 +50,10 @@ final class LoginView: UIView, LoginViewProtocol {
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
-        button.setTitle("Войти", for: .normal)
+        button.setTitle(.Login.buttonTitle, for: .normal)
         button.layer.cornerRadius = 4
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(loginButtonTouched), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -63,7 +63,6 @@ final class LoginView: UIView, LoginViewProtocol {
         stackView.addArrangedSubviews(loginTextField, passwordTextField, loginButton)
         stackView.spacing = 10
         stackView.setCustomSpacing(20, after: passwordTextField)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -76,11 +75,11 @@ final class LoginView: UIView, LoginViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func tap() {
+    @objc private func tap() {
         endEditing(true)
     }
     
-    @objc func loginButtonTouched() {
+    @objc private func loginButtonTouched() {
         loginAction?(loginTextField.text, passwordTextField.text)
     }
     
@@ -93,17 +92,22 @@ final class LoginView: UIView, LoginViewProtocol {
         addGestureRecognizer(tap)
         
         addSubviews(notificationView, stackView)
-        NSLayoutConstraint.activate([
-//            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32),
-            
-            loginTextField.heightAnchor.constraint(equalToConstant: 32),
-            
-            passwordTextField.heightAnchor.constraint(equalToConstant: 32),
-            
-            loginButton.heightAnchor.constraint(equalToConstant: 32)
-        ])
+        
+        stackView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(32)
+        }
+        
+        loginTextField.snp.makeConstraints { make in
+            make.height.equalTo(32)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.height.equalTo(32)
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.height.equalTo(32)
+        }
     }
 }

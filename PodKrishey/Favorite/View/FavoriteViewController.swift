@@ -30,7 +30,7 @@ final class FavoriteViewController: UIViewController {
     
     func setViewModel(viewModel: FavoriteViewModelProtocol) {
         self.viewModel = viewModel
-        mainView.likeAction = viewModel.removeFromFavorite(apartment:)
+        mainView.addToFavoriteAction = viewModel.removeFromFavorite(apartment:)
         updateView()
     }
     
@@ -44,7 +44,7 @@ final class FavoriteViewController: UIViewController {
         }
     }
     
-    private func likeAction() {
+    private func addToFavoriteAction() {
         
 //        mainView.deleteItemAt(indexPath: <#T##IndexPath#>)
     }
